@@ -6,27 +6,31 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 11:24:23 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/13 14:01:11 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/13 16:44:24 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void print_list(t_fd_list **kr) {
-	t_fd_list **list = kr;
-	while (*list)
+void print_list(t_fd_list **list) {
+	t_fd_list *kr = *list;
+	while (kr)
 	{
-		printf("[fd : %d] [str : \'%s\']\n", (*list)->fd, (*list)->str);
-		*list = (*list)->next;
+		printf("[fd : %d] [str : \'%s\']\n", kr->fd, kr->str);
+		kr = kr->next;
 	}
 }
 
 void 		delete_curr(t_fd_list **list, t_fd_list *curr)
 {
 	t_fd_list *kr = *list;
+
+	print_list(list);
 	while (kr->next)
 	{
-		printf("lol\n");
+		///printf("lol\n");
+	//	print_list(list);
+		///printf("test2\n");
 		if (kr->next->fd == curr->fd)
 		{
 			if (curr->next)
@@ -45,20 +49,20 @@ t_fd_list	*get_line_by_fd(t_fd_list **list, int fd)
 {
 	t_fd_list	*new;
 	t_fd_list	*kr = *list;
-	while (kr->fd != -42)
+	while (kr->next)
 	{
-		//print_list(list);
-		 printf("test1\n");
+	//	print_list(list);
+		 ///printf("test1\n");
 		if (kr->fd == fd)
 			return (kr);
 		// printf("test2\n");
-		if (!(kr->next))
-			break;
+		/*if (!(kr->next))
+			break;*/
 		// printf("test3\n");
 		kr = kr->next;
 		// printf("test4\n");
 	}
-	// printf("test5\n");
+	///printf("%d\n", kr->fd);
 	if (!(new = (t_fd_list*)malloc(sizeof(t_fd_list))))
 		return (NULL);
 		// printf("tes4\n");
@@ -66,7 +70,7 @@ t_fd_list	*get_line_by_fd(t_fd_list **list, int fd)
 	new->str = ft_strnew(0);
 	new->next = NULL;
 	if (kr)
-		new->next = kr;
+		kr->next = new;
 	return (new);
 }
 
@@ -80,15 +84,14 @@ int		get_next_line(const int fd, char **line)
 	char				*tmp;
 
 	i = 0;
-	//print_list(&list);
+	///print_list(&list);
 	if (!list)
 	{
-		// printf("lol\n");
 		if (!(list = (t_fd_list*)malloc(sizeof(t_fd_list))))
 			return (-1);
 		list->fd = -42;
 	}
-	//print_list(&list);
+	///printf("%d %s\n", list->fd, list->str);
 	if (!(curr = get_line_by_fd(&list, fd)) || fd < 0 || !line || BUFF_SIZE <= 0)
 		return (-1);
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0 && *buff)
@@ -119,10 +122,10 @@ int		get_next_line(const int fd, char **line)
 		if (*line)
 			return (1);
 	}
-	//print_list(&list);
 	if (curr != NULL)
 		delete_curr(&list, curr);
-	//print_list(&list);
+	///printf("LISTEFINALE DE LA MORT\n");
+	///print_list(&list);
 	return (0);
 }
 
