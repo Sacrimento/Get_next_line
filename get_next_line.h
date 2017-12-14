@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 10:22:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/14 17:09:23 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/14 17:36:53 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "libft/libft.h"
-# define BUFF_SIZE 2
+# define BUFF_SIZE 1
 
 #include <stdio.h>
 

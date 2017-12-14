@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 17:21:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/14 17:11:01 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/14 17:37:52 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,27 +93,11 @@ int			get_next_line(const int fd, char **line)
 	{
 		while (current->str[i] != '\n' && current->str[i])
 			i++;
-		current->str[i] = '\0';
 		*line = NULL;
 		*line = ft_strsub(current->str, 0, i);
-
-		//if (current->str[i + 1])
-		//{
-			tmp = ft_strdup(&(current->str[i + 1])); //NO LEAKS && NO MULTIPLE FD <- OPTI
-			free(current->str);
-			current->str = tmp;
-		//}
-		//else
-		//{
-			//free(current->str);
-			//current->str = ft_strdup("");
-		//}
-
-		//current->str = &(current->str[i + 1]); //LEAKS && MULTIPLE FD
-
-		//tmp = &(current->str[i + 1]); //NO LEAKS && NO MULTIPLE FD
-		//current->str = ft_strncpy(current->str, tmp, i);
-
+		tmp = ft_strdup(&(current->str[i + 1])); //NO LEAKS && NO MULTIPLE FD <- OPTI
+		free(current->str);
+		current->str = tmp;
 		return (1);
 	}
 	return (0);
