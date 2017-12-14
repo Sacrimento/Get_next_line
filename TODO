@@ -1,0 +1,5 @@
+MULTIPLE FD NOT SUPPORTED :
+-> must have returned '0' at the end of file ./srcs/gnl/gnl11_2.txt
+
+BUFF_SIZE < 3 :
+Timeout sur le moulitest, taille de buffer ?

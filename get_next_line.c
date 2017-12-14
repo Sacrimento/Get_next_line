@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 17:21:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/14 14:54:44 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/14 17:11:01 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int			get_next_line(const int fd, char **line)
 	{
 		buff[ret] = '\0';
 		current->str = ft_strjoin(current->str, buff);
-		if (ft_memchr(current->str, '\n', BUFF_SIZE))
+		if (ft_memchr(current->str, '\n', ft_strlen(current->str)))
 			break ;
 	}
 	if (ret < 0)
@@ -96,13 +96,26 @@ int			get_next_line(const int fd, char **line)
 		current->str[i] = '\0';
 		*line = NULL;
 		*line = ft_strsub(current->str, 0, i);
-		tmp = ft_strdup(&(current->str[i + 1]));
-		free(current->str);
-		current->str = tmp;
-		//current->str = &(current->str[i + 1]);
+
+		//if (current->str[i + 1])
+		//{
+			tmp = ft_strdup(&(current->str[i + 1])); //NO LEAKS && NO MULTIPLE FD <- OPTI
+			free(current->str);
+			current->str = tmp;
+		//}
+		//else
+		//{
+			//free(current->str);
+			//current->str = ft_strdup("");
+		//}
+
+		//current->str = &(current->str[i + 1]); //LEAKS && MULTIPLE FD
+
+		//tmp = &(current->str[i + 1]); //NO LEAKS && NO MULTIPLE FD
+		//current->str = ft_strncpy(current->str, tmp, i);
+
 		return (1);
 	}
-	//delete_curr(&list, fd);
 	return (0);
 }
 
@@ -112,6 +125,7 @@ int			get_next_line(const int fd, char **line)
 	char	*str;
 	int		fd = open(argv[1], O_RDONLY);
 	int		fd2 = open(argv[2], O_RDONLY);
+	int		fd3 = open(argv[3], O_RDONLY);
 
 	get_next_line(fd, &str);
 	printf("%s\n", str);
@@ -119,6 +133,11 @@ int			get_next_line(const int fd, char **line)
 	get_next_line(fd2, &str);
 	printf("%s\n", str);
 	ft_memdel((void**)&str);
+	while (get_next_line(fd3, &str) == 1)
+	{
+		printf("%s\n", str);
+		ft_memdel((void**)&str);
+	}
 	get_next_line(fd, &str);
 	printf("%s\n", str);
 	ft_memdel((void**)&str);
