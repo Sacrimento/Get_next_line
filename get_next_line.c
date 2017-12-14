@@ -6,11 +6,34 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 17:21:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/14 13:13:56 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/14 14:54:44 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+/*void 		delete_curr(t_fd_list **list, int fd)
+{
+	t_fd_list	*current;
+
+	current = *list;
+	if (current->fd == fd)
+	{
+		*list = current->next;
+		free(current->str);
+		free(current);
+	}
+	while (current->next)
+	{
+		if (current->next->fd == fd)
+		{
+			free(current->next->str);
+			free(current->next);
+			current->next = current->next->next;
+		}
+		current = current->next;
+	}
+}*/
 
 t_fd_list	*get_line_by_fd(t_fd_list **list, int fd)
 {
@@ -45,6 +68,7 @@ int			get_next_line(const int fd, char **line)
 	int					ret;
 	int					i;
 	char				buff[BUFF_SIZE + 1];
+	char				*tmp;
 
 	if (!list)
 	{
@@ -72,13 +96,17 @@ int			get_next_line(const int fd, char **line)
 		current->str[i] = '\0';
 		*line = NULL;
 		*line = ft_strsub(current->str, 0, i);
-		current->str = &(current->str[i + 1]);
+		tmp = ft_strdup(&(current->str[i + 1]));
+		free(current->str);
+		current->str = tmp;
+		//current->str = &(current->str[i + 1]);
 		return (1);
 	}
+	//delete_curr(&list, fd);
 	return (0);
 }
 
-int		main(int argc, char **argv)
+/*int		main(int argc, char **argv)
 {
 	(void)argc;
 	char	*str;
@@ -87,11 +115,15 @@ int		main(int argc, char **argv)
 
 	get_next_line(fd, &str);
 	printf("%s\n", str);
+	ft_memdel((void**)&str);
 	get_next_line(fd2, &str);
 	printf("%s\n", str);
+	ft_memdel((void**)&str);
 	get_next_line(fd, &str);
 	printf("%s\n", str);
+	ft_memdel((void**)&str);
 	get_next_line(fd2, &str);
 	printf("%s\n", str);
+	ft_memdel((void**)&str);
 	return (0);
-}
+}*/
