@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_linev3.c                                  :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 17:21:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/14 12:37:01 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:13:56 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void 		plist(t_fd_list *list)
-{
-	printf("Liste : \n");
-	t_fd_list *kr = list;
-	while(kr)
-	{
-		printf("[fd %d][str \'%s\']\n", kr->fd, kr->str);
-		kr = kr->next;
-	}
-}
 
 t_fd_list	*get_line_by_fd(t_fd_list **list, int fd)
 {
@@ -73,19 +62,19 @@ int			get_next_line(const int fd, char **line)
 		if (ft_memchr(current->str, '\n', BUFF_SIZE))
 			break ;
 	}
+	if (ret < 0)
+		return (-1);
 	i = 0;
 	if (*current->str)
 	{
 		while (current->str[i] != '\n' && current->str[i])
 			i++;
 		current->str[i] = '\0';
-		free(*line);
+		*line = NULL;
 		*line = ft_strsub(current->str, 0, i);
 		current->str = &(current->str[i + 1]);
 		return (1);
 	}
-	//delete_current(list, curr);
-	//plist(list);
 	return (0);
 }
 
