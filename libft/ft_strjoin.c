@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 09:11:52 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/14 17:56:58 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/15 15:41:56 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	while (s2[i])
 		new_s[j++] = s2[i++];
-	free((char*)s1);
 	new_s[j] = '\0';
 	return (new_s);
 }
