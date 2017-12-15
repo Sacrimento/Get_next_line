@@ -6,7 +6,7 @@
 #    By: abouvero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 11:47:22 by abouvero          #+#    #+#              #
-#    Updated: 2017/11/25 17:38:24 by abouvero         ###   ########.fr        #
+#    Updated: 2017/12/15 17:38:09 by abouvero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRCS = ft_memset.c \
 OBJ = $(SRCS:.c=.o)
 NAME = libft.a
 FLAGS =-Wall -Werror -Wextra
+INC=libft/includes
 
 all: $(NAME)
 
@@ -87,7 +88,7 @@ $(NAME): $(OBJ)
 	@ar rcs $(NAME) $^
 
 %.o:	%.c
-	@$(CC) $(FLAGS) -o $@ -c $<
+	@$(CC) -I $(INC) $(FLAGS) -o $@ -c $<
 
 clean:
 	@rm -f *.o

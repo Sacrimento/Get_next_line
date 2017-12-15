@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:09:28 by abouvero          #+#    #+#             */
-/*   Updated: 2017/11/17 14:57:32 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/15 17:31:13 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 static int	check_special_char(const char *str)
 {

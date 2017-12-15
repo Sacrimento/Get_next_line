@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 09:47:53 by abouvero          #+#    #+#             */
-/*   Updated: 2017/11/16 12:26:51 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/15 17:35:10 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 static int	strmodlen(char const *s, char c)
 {

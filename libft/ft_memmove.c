@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:32:41 by abouvero          #+#    #+#             */
-/*   Updated: 2017/11/14 15:26:01 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/15 17:34:09 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include "libft.h"
+#include "includes/libft.h"
 
 static int		overlap(void *dst, const void *src, size_t len)
 {

@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 17:21:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/15 15:55:35 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/15 17:41:30 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ static char			*ft_strjoin_custom(char *s1, char *s2)
 static	int			ft_read(t_fd_list *current, int fd)
 {
 	int		ret;
-	char	buff[BUFF_SIZE + 1];
+	char	*buff;
 
+	buff = ft_strnew(BUFF_SIZE);
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0 && *buff)
 	{
 		buff[ret] = '\0';
@@ -66,6 +67,7 @@ static	int			ft_read(t_fd_list *current, int fd)
 		if (ft_memchr(current->str, '\n', ft_strlen(current->str)))
 			break ;
 	}
+	free(buff);
 	if (ret < 0)
 		return (-1);
 	return (0);
@@ -118,43 +120,3 @@ int					get_next_line(const int fd, char **line)
 	current->str = ft_strnew(0);
 	return (0);
 }
-
-/*int		main(int argc, char **argv)
-{
-	(void)argc;
-	char	*str;
-	//int		fd = open(argv[1], O_RDONLY);
-	int		fd2 = open(argv[2], O_RDONLY);
-	//int		fd3 = open(argv[3], O_RDONLY);
-
-	get_next_line(fd, &str);
-	printf("%s\n", str);
-	ft_memdel((void**)&str);
-	get_next_line(fd2, &str);
-	printf("%s\n", str);
-	ft_memdel((void**)&str);
-	while (get_next_line(fd3, &str) == 1)
-	{
-		printf("%s\n", str);
-		ft_memdel((void**)&str);
-	}
-	get_next_line(fd, &str);
-	printf("%s\n", str);
-	ft_memdel((void**)&str);
-	get_next_line(fd2, &str);
-	printf("%s\n", str);
-	ft_memdel((void**)&str);
-	printf ("%d\n", get_next_line(fd2, &str));
-	printf("%s\n", str);
-	ft_memdel((void**)&str);
-	printf ("%d\n", get_next_line(fd2, &str));
-	printf("%s\n", str);
-	ft_memdel((void**)&str);
-	printf ("%d\n", get_next_line(fd, &str));
-	printf("%s\n", str);
-	ft_memdel((void**)&str);
-	printf ("%d\n", get_next_line(fd, &str));
-	printf("%s\n", str);
-	ft_memdel((void**)&str);
-	return (0);
-}*/
