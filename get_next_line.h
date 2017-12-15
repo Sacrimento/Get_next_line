@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 10:22:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/15 17:32:28 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/15 19:27:08 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/includes/libft.h"
-# define BUFF_SIZE 11
+# define BUFF_SIZE 2048
 
 typedef struct	s_fd_list
 {
