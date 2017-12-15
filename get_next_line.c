@@ -6,34 +6,11 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 17:21:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/14 17:37:52 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/15 15:05:32 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-/*void 		delete_curr(t_fd_list **list, int fd)
-{
-	t_fd_list	*current;
-
-	current = *list;
-	if (current->fd == fd)
-	{
-		*list = current->next;
-		free(current->str);
-		free(current);
-	}
-	while (current->next)
-	{
-		if (current->next->fd == fd)
-		{
-			free(current->next->str);
-			free(current->next);
-			current->next = current->next->next;
-		}
-		current = current->next;
-	}
-}*/
 
 t_fd_list	*get_line_by_fd(t_fd_list **list, int fd)
 {
@@ -95,11 +72,13 @@ int			get_next_line(const int fd, char **line)
 			i++;
 		*line = NULL;
 		*line = ft_strsub(current->str, 0, i);
-		tmp = ft_strdup(&(current->str[i + 1])); //NO LEAKS && NO MULTIPLE FD <- OPTI
-		free(current->str);
+		tmp = ft_strsub(current->str, i + 1, ft_strlen(current->str) - i);
+		ft_memdel((void**)&current->str);
 		current->str = tmp;
 		return (1);
 	}
+	free(current->str);
+	current->str = ft_strnew(0);
 	return (0);
 }
 
@@ -107,9 +86,9 @@ int			get_next_line(const int fd, char **line)
 {
 	(void)argc;
 	char	*str;
-	int		fd = open(argv[1], O_RDONLY);
+	//int		fd = open(argv[1], O_RDONLY);
 	int		fd2 = open(argv[2], O_RDONLY);
-	int		fd3 = open(argv[3], O_RDONLY);
+	//int		fd3 = open(argv[3], O_RDONLY);
 
 	get_next_line(fd, &str);
 	printf("%s\n", str);
@@ -126,6 +105,18 @@ int			get_next_line(const int fd, char **line)
 	printf("%s\n", str);
 	ft_memdel((void**)&str);
 	get_next_line(fd2, &str);
+	printf("%s\n", str);
+	ft_memdel((void**)&str);
+	printf ("%d\n", get_next_line(fd2, &str));
+	printf("%s\n", str);
+	ft_memdel((void**)&str);
+	printf ("%d\n", get_next_line(fd2, &str));
+	printf("%s\n", str);
+	ft_memdel((void**)&str);
+	printf ("%d\n", get_next_line(fd, &str));
+	printf("%s\n", str);
+	ft_memdel((void**)&str);
+	printf ("%d\n", get_next_line(fd, &str));
 	printf("%s\n", str);
 	ft_memdel((void**)&str);
 	return (0);
