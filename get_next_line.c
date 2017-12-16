@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 17:21:29 by abouvero          #+#    #+#             */
-/*   Updated: 2017/12/15 17:41:30 by abouvero         ###   ########.fr       */
+/*   Updated: 2017/12/16 12:06:31 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ static t_fd_list	*get_line_by_fd(t_fd_list **list, int fd)
 	new->next = NULL;
 	if (current)
 		current->next = new;
-	else
-		*list = new;
 	return (new);
 }
 
